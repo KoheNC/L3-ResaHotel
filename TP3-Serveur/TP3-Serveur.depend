@@ -1,0 +1,83 @@
+# depslib dependency file v1.0
+1385635558 source:/home/etu/TP3/TP3-Serveur/mainServeur.c
+	<stdio.h>
+	<stdlib.h>
+	"serveur.h"
+
+1317373278 /home/etu/TP3/TP3-Serveur/serveur.h
+
+1354487956 source:/home/etu/TP3/TP3-Serveur/serveur.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"serveur.h"
+
+1385635558 source:/home/etu/CodeBlocks/TP3/TP3-Serveur/mainServeur.c
+	<stdio.h>
+	<stdlib.h>
+	"serveur.h"
+
+1317373278 /home/etu/CodeBlocks/TP3/TP3-Serveur/serveur.h
+
+1385635558 source:/home/etu/STRI - RÃ©servation hÃ´teliÃ¨re/TP3-Serveur/mainServeur.c
+	<stdio.h>
+	<stdlib.h>
+	"serveur.h"
+
+1317373278 /home/etu/STRI - RÃ©servation hÃ´teliÃ¨re/TP3-Serveur/serveur.h
+
+1387450468 source:/home/etu/STRI - RÃ©servation hÃ´teliÃ¨re/TP3-Serveur/serveur.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"serveur.h"
+
+1385635558 source:l:\07 - stri 2013\stri - réservation hôtelière\tp3-serveur\mainserveur.c
+	<stdio.h>
+	<stdlib.h>
+	"serveur.h"
+
+1317369678 l:\07 - stri 2013\stri - réservation hôtelière\tp3-serveur\serveur.h
+
+1387450468 source:l:\07 - stri 2013\stri - réservation hôtelière\tp3-serveur\serveur.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"serveur.h"
+

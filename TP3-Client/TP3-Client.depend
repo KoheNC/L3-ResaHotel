@@ -1,0 +1,119 @@
+# depslib dependency file v1.0
+1384414561 source:/home/etu/TP3/TP3-Client/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1390142301 
+
+1385633113 source:/home/etu/TP3/TP3-Client/client.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"client.h"
+
+1317373335 /home/etu/TP3/TP3-Client/client.h
+
+1385632194 source:/home/etu/TP3/TP3-Client/mainClient.c
+	<stdio.h>
+	<stdlib.h>
+	"client.h"
+	<string.h>
+
+1389969047 source:/home/etu/STRI - RÃ©servation hÃ´teliÃ¨re/TP3-Client/client.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"client.h"
+
+1389966996 /home/etu/STRI - RÃ©servation hÃ´teliÃ¨re/TP3-Client/client.h
+
+1389968052 source:/home/etu/STRI - RÃ©servation hÃ´teliÃ¨re/TP3-Client/mainClient.c
+	<stdio.h>
+	<stdlib.h>
+	"client.h"
+	<string.h>
+
+1389966549 /home/etu/STRI - RÃ©servation hÃ´teliÃ¨re/TP3-Client/client.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"client.h"
+
+1390141495 source:l:\07 - stri 2013\stri - réservation hôtelière\tp3-client\client.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"client.h"
+
+1389966996 l:\07 - stri 2013\stri - réservation hôtelière\tp3-client\client.h
+
+1390142301 source:l:\07 - stri 2013\stri - réservation hôtelière\tp3-client\mainclient.c
+	<stdio.h>
+	<stdlib.h>
+	"client.h"
+	<string.h>
+
+1390556146 source:/home/etu/STRI - RÃ©servation hÃ´teliÃ¨re LERAYER MAYODE/TP3-Client/mainClient.c
+	<stdio.h>
+	<stdlib.h>
+	"client.h"
+	<string.h>
+
+1390556146 /home/etu/STRI - RÃ©servation hÃ´teliÃ¨re LERAYER MAYODE/TP3-Client/client.h
+
+1390556146 source:c:\users\swoosh\google drive\stri - l3\stri - réservation hôtelière sqlite\tp3-client\mainclient.c
+	<stdio.h>
+	<stdlib.h>
+	"client.h"
+	<string.h>
+
+1390556146 c:\users\swoosh\google drive\stri - l3\stri - réservation hôtelière sqlite\tp3-client\client.h
+

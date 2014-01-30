@@ -1,0 +1,110 @@
+/** Algorithme Client **/
+/** Cette algorithme décrit les différentes étapes et les différents choix 
+ ** possibles que l'utilisateur pourrait avoir
+ ** lors de sa connection sur un poste client **/
+VARIABLES
+		int:Retour,Choix,ChoixId,ChoixGerant,ChoixClient,ChoixAffichageClient
+
+DEBUT
+	Afficher(" Bienvenue sur l'application ####### ")
+	Afficher(" 1: Accéder au serveur ")
+	Afficher(" 2: Quitter ")
+	Afficher(" Choix (1 ou 2): ")
+	Saisir(Choix)
+	SI CHOIX=1 ALORS
+	DEBUT
+		Retour=Connecter()
+		Si retour=1 ALORS
+			Afficher(" Vous êtes maintenant connecté au serveur ")
+			Afficher(" Qui êtes vous? ")
+			Afficher(" 1: Gerant ")
+			Afficher(" 2: Acteur touristique ")
+			Afficher(" 3: Déconnexion ")
+			Afficher(" Choix(1, 2 ou 3): ")
+			Saisir(ChoixId)
+			Selon (ChoixId) ALORS
+			cas(ChoixId=1)
+				Retour=Authentifier()
+				SI Retour=1 ALORS
+				DEBUT
+					Afficher(" Que désirez-vous faire? ")
+					Afficher(" 1: Enregistrer un nouvelle hôtel ")
+					Afficher(" 2: Modifier les informations de votre hôtel ");
+					Afficher(" 3: Retour au menu principal ");
+					Afficher(" Choix(1, 2 ou 3): ")
+					Saisir(ChoixGerant)
+					Selon (ChoixGerant) ALORS
+					
+					cas(ChoixGerant=1)
+						Retour=EnregisterHotel()
+						SI Retour=1 ALORS
+							Afficher(" Enregistrement Réussi ")
+						SINON 
+							Afficher(" Echec de l'enregistrement ")
+					
+					cas(ChoixGerant=2)
+						Retour=Editer()
+						SI Retour=1 ALORS
+							Afficher(" Les informations ont été modifiés avec succès ")
+						SINON 
+							Afficher(" Echec des modifications ")
+					
+					cas(ChoixGerant=3)
+						Desauthentifier()
+				FIN		
+				SINON
+					Afficher(" Erreur d'authentification ")
+											
+			cas(ChoixId=2)
+			DEBUT		
+				Afficher(" Bienvenue cher client, que désirez-vous faire? ")
+				Afficher(" 1: Consulter la liste des hôtels ")
+				Afficher(" 2: Réserver ")
+				Afficher(" 3: Retour au menu principal")
+				Afficher(" Choix(1, 2 ou 3): ")
+				Saisir(ChoixClient)
+				Selon (ChoixClient) ALORS
+				
+				cas(ChoixClient=1)
+				DEBUT
+					ConsulterHotels() //Sert à quoi ?!
+					Afficher(" Souhaitez-vous: ")
+					Afficher(" 1: Afficher la liste des hôtels par catégorie")
+					Afficher(" 2: Afficher la liste des hôtels par nom ")
+					Afficher(" 3: Afficher la liste des hôtels par lieu")
+					Afficher(" 4: Retour au menu précédent ")
+					Afficher(" Choix(1, 2, 3 ou 4): ")
+					Saisir(ChoixAffichageClient)
+					Selon(ChoixAffichageClient) Alors
+					
+					cas(ChoixAffichageClient=1)
+						ConsulterParCategorie()
+						
+					cas(ChoixAffichageClient=2)
+						ConsulterParNom()
+						
+					cas(ChoixAffichageClient=3)
+						ConsulterParLocalisation()
+					
+					cas(ChoixAffichageClient=4)
+						break						
+				FIN
+				
+				cas(ChoixClient=2)				
+					Reserver()
+				
+				cas(ChoixClient=3)
+					break
+					
+			FIN
+			
+			cas(ChoixId=3)
+				Deconnecter()
+				
+		SINON
+			Afficher(" Echec de la connexion ")
+	FIN
+	SINON
+		Deconnecter()
+
+FIN					

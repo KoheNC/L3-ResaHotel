@@ -1,0 +1,42 @@
+/** Algorithme Serveur **/
+/** Cette algorithme décrit les différentes étapes et les différentes tâches
+ ** possibles que le serveur utilisera lors de la connection 
+ ** d'un poste client afin de lui garantir les services nécessaires **/
+VARIABLE
+	int:message
+	char *:Identifiants,ActionGerant,ActionClient
+DEBUT
+	Afficher(" Vous êtes maintenant connecté sur le serveur ")
+	message=Recevoir()
+	Si (message=1) ALORS
+	DEBUT
+		Identifiants=Recevoir()
+		retour=Autoriser(Identifiants)
+		SI retour=1 ALORS
+		DEBUT
+			Envoyer(1)
+			ActionGerant=Recevoir()	
+			SI (ActionGerant="EnregistrerHotel") ALORS
+				EnregistrerNouvelleHotel()
+			
+			SINON SI (ActionGerant="Editer") ALORS
+				EnregisterModificationHotel()			
+		FIN
+		SINON
+			Envoyer(0)
+			Refuser()
+	FIN
+	
+	SINON SI (message=2)
+	DEBUT
+		ActionClient=Recevoir()
+		SI (ActionClient="ConsulterHotels") ALORS
+			ConsulterListeHotel()
+
+		SINON SI (ActionClient="Reserver") ALORS
+			EnregisterReservation()
+	FIN
+FIN
+	
+	
+	
