@@ -46,7 +46,7 @@ int main()
                             case 1:
                                 action
                             }
-
+//ceci est un test
                 //Si c'est un client
                 case 2:
                     printf("Bienvenue cher client, que désirez-vous faire ? \n");
