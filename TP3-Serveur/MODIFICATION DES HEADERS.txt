@@ -1,0 +1,2 @@
+Modification de <ws2tcpip> aux lignes:
+	297/303/305: Ajout de "//" pour mettre la condition en commentaire

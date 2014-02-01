@@ -81,3 +81,163 @@
 	<errno.h>
 	"serveur.h"
 
+1390746466 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\mainserveur.c
+	<stdio.h>
+	<stdlib.h>
+	"serveur.h"
+	"sqlite3.h"
+
+1317369678 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.h
+
+1386363916 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\sqlite3.h
+	<stdarg.h>
+
+1391272278 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	"sqlite3.h"
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	<ws2tcpip.h>
+	<ddk/ws2san.h>
+	"serveur.h"
+
+1386363916 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\sqlite3.c
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<windows.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/file.h>
+	<sys/param.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	<sys/cygwin.h>
+	<errno.h>
+	<tcl.h>
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+
+1390746466 source:y:\tp3-serveur\mainserveur.c
+	<stdio.h>
+	<stdlib.h>
+	"serveur.h"
+	"sqlite3.h"
+
+1317373278 y:\tp3-serveur\serveur.h
+
+1386363916 y:\tp3-serveur\sqlite3.h
+	<stdarg.h>
+
+1391272278 source:y:\tp3-serveur\serveur.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	"sqlite3.h"
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	<ws2tcpip.h>
+	<ddk/ws2san.h>
+	"serveur.h"
+
+1386363916 source:y:\tp3-serveur\sqlite3.c
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<windows.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/file.h>
+	<sys/param.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	<sys/cygwin.h>
+	<errno.h>
+	<tcl.h>
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+
