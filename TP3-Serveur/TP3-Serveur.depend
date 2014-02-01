@@ -92,14 +92,13 @@
 1386363916 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\sqlite3.h
 	<stdarg.h>
 
-1391272278 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.c
+1391279468 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<string.h>
 	<sys/types.h>
 	"sqlite3.h"
-	<winsock2.h>
 	<ws2tcpip.h>
 	<unistd.h>
 	<netdb.h>
@@ -109,8 +108,6 @@
 	<arpa/inet.h>
 	<strings.h>
 	<errno.h>
-	<ws2tcpip.h>
-	<ddk/ws2san.h>
 	"serveur.h"
 
 1386363916 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\sqlite3.c

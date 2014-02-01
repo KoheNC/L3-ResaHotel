@@ -1,3 +1,4 @@
+#define _WIN32_WINNT 0x0601
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -6,7 +7,7 @@
 #include "sqlite3.h"
 
 #ifdef WIN32
-//#include <winsock2.h>
+//#include <winsock2.h> //Ne sert pas car l'on compile avec la lib "libws2_32.a"
 #include <ws2tcpip.h>
 #else
 #include <unistd.h>
