@@ -1,5 +1,6 @@
 #ifndef __CLIENT_H__
 #define __CLIENT_H__
+#include <stddef.h> //Utilisé pour la définition du type "size_t"
 
 /* Initialisation.
  * Connexion au serveur sur la machine donnee.

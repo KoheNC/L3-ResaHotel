@@ -135,9 +135,10 @@
 	<errno.h>
 	"client.h"
 
-1391280010 c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.h
+1391295724 c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.h
+	<stddef.h>
 
-1391279956 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\mainclient.c
+1391295357 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\mainclient.c
 	<stdio.h>
 	<stdlib.h>
 	"client.h"

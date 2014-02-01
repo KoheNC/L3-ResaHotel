@@ -1,4 +1,9 @@
 #define _WIN32_WINNT 0x0601
+/*
+ Bear in mind that since you're telling the compiler that you're using Windows 7 here,
+ you will not be able to make use of functions that are only available to versions
+ prior to the one you have defined (Windows 7).
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -33,6 +38,16 @@
 #define close closesocket
 #define socklen_t int
 #endif
+
+//Callback utilisé pour le SELECT des requêtes SQL
+int callback(void *NotUsed, int argc, char **argv, char **azColName){
+   int i;
+   for(i=0; i<argc; i++){
+      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+   }
+   printf("\n");
+   return 0;
+}
 
 //8.a )Extraction d'une requête HTTP contenue dans une chaine de caractères
 
@@ -186,7 +201,7 @@ int AttenteClient() {
 		return 0;
 	}
 	if(getnameinfo(clientAddr, longeurAdr, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
-		printf("Client sur la machine d'adresse %s connecte.\n", machine);
+		printf("Client sur la machine d'adresse %s connectee.\n", machine);
 	} else {
 		printf("Client anonyme connecte.\n");
 	}

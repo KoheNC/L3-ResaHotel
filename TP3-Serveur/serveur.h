@@ -43,7 +43,6 @@ int ReceptionBinaire(char *donnees, size_t tailleMax);
  */
 int EmissionBinaire(char *donnees, size_t taille);
 
-
 /* Ferme la connexion avec le client.
  */
 void TerminaisonClient();
@@ -52,4 +51,8 @@ void TerminaisonClient();
  */
 void Terminaison();
 
+/*
+This callback provides a way to obtain results from SELECT statements
+*/
+int callback(void *NotUsed, int argc, char **argv, char **azColName);
 #endif
