@@ -117,3 +117,29 @@
 
 1390556146 c:\users\swoosh\google drive\stri - l3\stri - réservation hôtelière sqlite\tp3-client\client.h
 
+1391279929 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<string.h>
+	<sys/types.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<unistd.h>
+	<netdb.h>
+	<sys/socket.h>
+	<sys/select.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	<strings.h>
+	<errno.h>
+	"client.h"
+
+1391280010 c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.h
+
+1391279956 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\mainclient.c
+	<stdio.h>
+	<stdlib.h>
+	"client.h"
+	<string.h>
+

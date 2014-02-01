@@ -45,7 +45,7 @@ void Terminaison();
 
 /*Permet de construire la chaine nécesaire à l'authentification
 */
-int Authentifier();
+int authentifier();
 
 /*Sélection des hôtels par leur nombre d'étoiles
 */

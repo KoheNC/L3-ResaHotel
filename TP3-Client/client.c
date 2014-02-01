@@ -1,4 +1,4 @@
-
+#define _WIN32_WINNT 0x0601
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -48,7 +48,7 @@ int authentifier()
     {
     char login[10], pwd[10];
     char formatageMsg[50];
-    char *retourMsg
+    char *retourMsg;
     char *requeteSQL;
 
     printf("Veuillez entrer votre login\n");

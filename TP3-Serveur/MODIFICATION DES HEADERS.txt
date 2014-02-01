@@ -1,2 +1,3 @@
-Modification de <ws2tcpip> aux lignes:
+Modification de <ws2tcpip.h> aux lignes:
 	297/303/305: Ajout de "//" pour mettre la condition en commentaire
+	edit 01/02/14: Enlèvement des commentaires "//" à ces lignes

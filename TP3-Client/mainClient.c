@@ -41,11 +41,11 @@ int main()
                         }else
                             break;
 
-                        switch(choixGerant)
+                        /*switch(choixGerant)
                             {
                             case 1:
                                 action
-                            }
+                            }*/
 //ceci est un test
                 //Si c'est un client
                 case 2:
