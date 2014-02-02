@@ -1,13 +1,23 @@
 #define _WIN32_WINNT 0x0601
+/*
+ Bear in mind that since you're telling the compiler that you're using Windows 7 here,
+ you will not be able to make use of functions that are only available to versions
+ prior to the one you have defined (Windows 7).
+ */
+#include "client.h"
+#include "fonctionAjoutee.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
 #include <sys/types.h>
+#include <errno.h>
+#include <stddef.h>
 
 #ifdef WIN32
-#include <winsock2.h>
+//#include <winsock2.h> //Ne sert pas car l'on compile avec la lib "libws2_32.a"
 #include <ws2tcpip.h>
+#include <stddef.h> //Utilisé pour la définition du type "size_t"
 #else
 #include <unistd.h>
 #include <netdb.h>
@@ -18,19 +28,14 @@
 #include <strings.h>*/
 #endif
 
-#include <errno.h>
-
 #ifdef WIN32
 #define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
 #define close closesocket
 #define socklen_t int
 #endif
 
-#include "client.h"
-
 #define TRUE 1
 #define FALSE 0
-
 #define LONGUEUR_TAMPON 4096
 
 /* Variables cachees */
@@ -43,31 +48,38 @@ int debutTampon;
 int finTampon;
 int finConnexion = FALSE;
 
-
 int authentifier()
-    {
+{
     char login[10], pwd[10];
-    char formatageMsg[50];
-    char *retourMsg;
-    char *requeteSQL;
+    //char formatageMsg[50];
+    char *retourMsg=NULL;
+    char requeteSQL[100];
+
+    vider_buffer(); //On vide le buffer pour éviter les problèmes liés aux caractères restés dedans avec les précédents choix
 
     printf("Veuillez entrer votre login\n");
-    fgets(login,10,stdin);
+    lire(login,10);
     printf("Veuillez entrer votre mot de passe \n");
-    fgets(pwd,10,stdin);
-    sprintf(requeteSQL,"SELECT ",login,pwd);
+    lire(pwd,10);
+    sprintf(requeteSQL,"AUTHENT/%s/%s/END",login,pwd);
 
-    if(Emission(formatageMsg)==1)
+    if(Emission(requeteSQL)==1)
         {
         retourMsg=Reception();
-        printf("Authentification réussie. Bienvenue !\n");
-        printf(retourMsg);
-        return 1;
+        if (retourMsg!=NULL)
+            printf("Authentification réussie. Bienvenue !\n");
+        else
+            {
+            printf("Erreur: Login et/ou mot de passe incorrect(s). Retour au menu principal.\n");
+            return 0;
+            }
         }
     else
-        printf("Échec de l'authentification. Retour au menu principal. \n");
-        return 0;
-    }
+        {
+        printf("Erreur lors de l'envoi des données au serveur. Retour au menu principal. \n");
+        return 1;
+        }
+}
 
 int action_gerant(int choixGerant);
 

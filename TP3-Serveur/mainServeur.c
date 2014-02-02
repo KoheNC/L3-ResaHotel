@@ -20,17 +20,60 @@ int main() {
         {
         fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
         exit(0);
-        }else
-            fprintf(stderr, "Opened database successfully\n");
+        }
+    else
+        fprintf(stderr, "Opened database successfully\n");
 
-    //
+    /*/Création des tables de la DB
+    char *sql;
+    sql="DROP TABLE IF EXISTS user;"\
+        "DROP TABLE IF EXISTS hotel;"\
+        "DROP TABLE IF EXISTS reservation;"\
+        "CREATE TABLE user("\
+            "login   TEXT   PRIMARY KEY,"\
+            "pwd     TEXT   NOT NULL);"\
+            "INSERT INTO user (login,pwd)"\
+            "VALUES ('adrien','test');";
+
+    /* Execute SQL statement
+    int rc;
+   rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+   if( rc != SQLITE_OK ){
+      fprintf(stderr, "SQL error: %s\n", zErrMsg);
+      sqlite3_free(zErrMsg);
+   }else{
+      fprintf(stdout, "Records created successfully\n");
+   }*/
+   /////////////////////////////////////////////////////////////////////////
+   //* Create SQL statement
+   char *sql;
+   int rc;
+   sql = "SELECT login from user where login='paul';";
+   char* data = "Callback function called";
+
+   /* Execute SQL statement*/
+   rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+   if( rc != SQLITE_OK ){
+      fprintf(stderr, "SQL error: %s\n", zErrMsg);
+      sqlite3_free(zErrMsg);
+   }else{
+      fprintf(stdout, "Operation done successfully\n");
+      printf("%d",rc);//c'est pas rc qu'il faut check, mais ce que renvoie callback !!
+   }
+//*/
+
+   ////////////////////////////////////////////////////////////////////////
+   //sqlite3_close(db);
 
 	while(1)
         {
 		int fini = 0;
 
 		AttenteClient();
+		     printf("DEBUG: message=%s\n",message);
         message = Reception();
+        printf("DEBUG: message=%s\n",message);
+        extraction_requete(message);
 		/*while(!fini) {
 			message = Reception();
 
@@ -47,6 +90,7 @@ int main() {
 		}*/
 
 		TerminaisonClient();
+		sqlite3_close(db);
         }
 
 	return 0;

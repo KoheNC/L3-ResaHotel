@@ -117,14 +117,18 @@
 
 1390556146 c:\users\swoosh\google drive\stri - l3\stri - réservation hôtelière sqlite\tp3-client\client.h
 
-1391279929 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.c
+1391365293 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.c
+	"client.h"
+	"fonctionAjoutee.h"
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	<string.h>
 	<sys/types.h>
-	<winsock2.h>
+	<errno.h>
+	<stddef.h>
 	<ws2tcpip.h>
+	<stddef.h>
 	<unistd.h>
 	<netdb.h>
 	<sys/socket.h>
@@ -132,14 +136,20 @@
 	<netinet/in.h>
 	<arpa/inet.h>
 	<strings.h>
-	<errno.h>
-	"client.h"
 
-1391280010 c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.h
+1391362576 c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\client.h
+	<stddef.h>
 
-1391279956 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\mainclient.c
+1391295357 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\mainclient.c
 	<stdio.h>
 	<stdlib.h>
 	"client.h"
 	<string.h>
+
+1391364747 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\fonctionajoutee.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1391364785 c:\users\swoosh\google drive\github\l3-resahotel\tp3-client\fonctionajoutee.h
 
