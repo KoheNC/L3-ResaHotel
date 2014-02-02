@@ -49,6 +49,24 @@ int callback(void *NotUsed, int argc, char **argv, char **azColName){
    return 0;
 }
 
+//Extraction de la requête et tri des variables potentielles
+int extraction_requete(char *requete)
+{
+    int i=0;
+    int j=0;
+    char *identifiant=NULL;
+
+    //Tant qu'on est pas arrivé au 1er /, on incrémente jusqu'à le trouver et on stocke les caractères en attendant
+    while(requete[i]!='/')
+        {
+        identifiant[i]=requete[i];
+        i++;
+        printf("DEBUG, identifiant[%d]= %c \n",i,identifiant[i]);
+        }
+
+};
+
+
 //8.a )Extraction d'une requête HTTP contenue dans une chaine de caractères
 
 int extraitFichier(char *requete, size_t longueurRequete, char *nomFichier, size_t maxNomFichier){

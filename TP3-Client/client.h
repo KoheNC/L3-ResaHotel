@@ -68,4 +68,5 @@ int reserver();
 Envoi du choix du gérant au serveur pour le traitement
 */
 int actionGerant(int choixGerant);
+void clean_stdin(void);
 #endif

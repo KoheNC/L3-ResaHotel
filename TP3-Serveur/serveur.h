@@ -55,4 +55,10 @@ void Terminaison();
 This callback provides a way to obtain results from SELECT statements
 */
 int callback(void *NotUsed, int argc, char **argv, char **azColName);
+
+/*
+Extraction de la requête du client et tri des éventuelles variables
+*/
+int extraction_requete(char *requete);
+
 #endif

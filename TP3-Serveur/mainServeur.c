@@ -58,19 +58,22 @@ int main() {
       sqlite3_free(zErrMsg);
    }else{
       fprintf(stdout, "Operation done successfully\n");
-      printf("%s",rc);
+      printf("%d",rc);//c'est pas rc qu'il faut check, mais ce que renvoie callback !!
    }
 //*/
 
    ////////////////////////////////////////////////////////////////////////
-   sqlite3_close(db);
+   //sqlite3_close(db);
 
 	while(1)
         {
 		int fini = 0;
 
 		AttenteClient();
+		     printf("DEBUG: message=%s\n",message);
         message = Reception();
+        printf("DEBUG: message=%s\n",message);
+        extraction_requete(message);
 		/*while(!fini) {
 			message = Reception();
 

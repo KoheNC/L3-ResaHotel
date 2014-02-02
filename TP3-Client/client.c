@@ -5,6 +5,7 @@
  prior to the one you have defined (Windows 7).
  */
 #include "client.h"
+#include "fonctionAjoutee.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -47,21 +48,22 @@ int debutTampon;
 int finTampon;
 int finConnexion = FALSE;
 
-
 int authentifier()
-    {
+{
     char login[10], pwd[10];
-    char formatageMsg[50];
+    //char formatageMsg[50];
     char *retourMsg=NULL;
-    char *requeteSQL=NULL;
+    char requeteSQL[100];
+
+    vider_buffer(); //On vide le buffer pour éviter les problèmes liés aux caractères restés dedans avec les précédents choix
 
     printf("Veuillez entrer votre login\n");
-    fgets(login,10,stdin);
+    lire(login,10);
     printf("Veuillez entrer votre mot de passe \n");
-    fgets(pwd,10,stdin);
+    lire(pwd,10);
     sprintf(requeteSQL,"AUTHENT/%s/%s/END",login,pwd);
 
-    if(Emission(formatageMsg)==1)
+    if(Emission(requeteSQL)==1)
         {
         retourMsg=Reception();
         if (retourMsg!=NULL)
@@ -69,13 +71,13 @@ int authentifier()
         else
             {
             printf("Erreur: Login et/ou mot de passe incorrect(s). Retour au menu principal.\n");
-            return 1;
+            return 0;
             }
         }
     else
         {
         printf("Erreur lors de l'envoi des données au serveur. Retour au menu principal. \n");
-        return 0;
+        return 1;
         }
 }
 
