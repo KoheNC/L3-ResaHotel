@@ -61,13 +61,17 @@ int authentifier()
     lire(login,10);
     printf("Veuillez entrer votre mot de passe \n");
     lire(pwd,10);
-    sprintf(requeteSQL,"AUTHENT/%s/%s/END",login,pwd);
+    sprintf(requeteSQL,"AUTHENT/%s/%s/END\n",login,pwd);
 
     if(Emission(requeteSQL)==1)
         {
+            printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
         retourMsg=Reception();
-        if (retourMsg!=NULL)
+        if (retourMsg!=EOF)
+        {
             printf("Authentification réussie. Bienvenue !\n");
+            return 1;
+        }
         else
             {
             printf("Erreur: Login et/ou mot de passe incorrect(s). Retour au menu principal.\n");
@@ -77,7 +81,7 @@ int authentifier()
     else
         {
         printf("Erreur lors de l'envoi des données au serveur. Retour au menu principal. \n");
-        return 1;
+        return 0;
         }
 }
 

@@ -39,7 +39,10 @@ int main()
                         printf("3: Retour au menu principal \n");
                         scanf("%d",&choixGerant);
                         }else
-                            break;
+                            {
+                            printf("Échec de la connexion, retour au menu principal...\n");
+                            goto choixMenuPrincipal;
+                            };
 
                         /*switch(choixGerant)
                             {

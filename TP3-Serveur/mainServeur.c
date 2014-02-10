@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "serveur.h"
 #include "sqlite3.h"
+#include "fonctionAjouteeServeur.h"
+
 
 int main() {
 	char *message = NULL;
-	char *nomFichier[50]={};
 
 	Initialisation();
 
@@ -70,12 +72,19 @@ int main() {
 		int fini = 0;
 
 		AttenteClient();
-		     printf("DEBUG: message=%s\n",message);
+        printf("DEBUG: message avant réception=%s\n",message);
         message = Reception();
-        printf("DEBUG: message=%s\n",message);
-        extraction_requete(message);
-		/*while(!fini) {
+        printf("DEBUG: message après réception=%s\n",message);
+        //nbreCaractere=strlen(message);
+        //printf("DEBUG: Nbre caracteres=%d\n",nbreCaractere);
+
+        extraction_requete(message,sql);
+
+        printf("DEBUG: Après extraction\n");
+		while(!fini) {
 			message = Reception();
+
+			//Si on reçoit un pointeur vide c'est que le client a coupé la connexion
 
 			if(message != NULL) {
 				printf("J'ai recu: %s\n", message);
@@ -87,7 +96,9 @@ int main() {
 			} else {
 				fini = 1;
 			}
-		}*/
+		}
+
+
 
 		TerminaisonClient();
 		sqlite3_close(db);
