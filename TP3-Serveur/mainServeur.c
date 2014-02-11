@@ -26,9 +26,10 @@ int main() {
     else
         fprintf(stderr, "Opened database successfully\n");
 
-    /*/Création des tables de la DB
-    char *sql;
-    sql="DROP TABLE IF EXISTS user;"\
+    //Création des tables de la DB
+    //char sql[1000];
+    //sql="DROP TABLE IF EXISTS user;";
+    /*sql="DROP TABLE IF EXISTS user;"\
         "DROP TABLE IF EXISTS hotel;"\
         "DROP TABLE IF EXISTS reservation;"\
         "CREATE TABLE user("\
@@ -48,9 +49,12 @@ int main() {
    }*/
    /////////////////////////////////////////////////////////////////////////
    //* Create SQL statement
-   char *sql;
+   char *sql=NULL;
    int rc;
    sql = "SELECT login from user where login='paul';";
+
+   printf("%s\n",sql);
+
    char* data = "Callback function called";
 
    /* Execute SQL statement*/
@@ -75,12 +79,11 @@ int main() {
         printf("DEBUG: message avant réception=%s\n",message);
         message = Reception();
         printf("DEBUG: message après réception=%s\n",message);
-        //nbreCaractere=strlen(message);
-        //printf("DEBUG: Nbre caracteres=%d\n",nbreCaractere);
 
-        extraction_requete(message,sql);
+        extraction_requete(message,&sql);
+        printf("DEBUG: SQL=%s\n",sql);
 
-        printf("DEBUG: Après extraction\n");
+        printf("DEBUG: Après extraction:\n\n");
 		while(!fini) {
 			message = Reception();
 

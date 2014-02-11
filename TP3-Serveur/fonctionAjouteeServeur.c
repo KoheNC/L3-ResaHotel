@@ -3,54 +3,42 @@
 #include <ctype.h>
 #include <string.h>
 #include "serveur.h"
+#define MORCEAU 8 //pour l'allocation
 
 //Extraction de la requête, tri des variables potentielles et formulation de la requête SQL en conséquence
-int extraction_requete(char *requete, char *sql)
+int extraction_requete(char *requete, char **sql)
 {
     char login[10], mdp[10];
     char idenRequete[15], resteRequete[1000];
-    //char *idenRequete=NULL, *resteRequete=NULL;
     int nbreCaractere=0;
+    char *p;    /*pointeur pour la liaison avec *sql passé en paramètre*/
 
-    //On identifie le type de requête
+    //On identifie le type de requête et on enlève le '/' restant à la fin
     sscanf(requete, "%[^/]/%[^END]",idenRequete,resteRequete);
-
-    printf("DEBUG: requete=%s \n", requete);
-    printf("DEBUG: idenRequete=%s\n",idenRequete);
-    printf("DEBUG: resteRequete=%s\n",resteRequete);
-
-    //On enlève le '/' restant à la fin
     nbreCaractere=strlen(resteRequete);
     resteRequete[nbreCaractere-1]='\0';
 
-
-   /* char messagedetest[100];
-    sprintf(messagedetest,"test message, resterequete=%s",resteRequete);
-    printf("%s",messagedetest);*/
-
+    //Comparaison du résultat et traitement
     if(strcmp(idenRequete,"AUTHENT")==0)
         {
+        int longReqSQL=0, longLogin=0,longMdp=0;
+        char *reqSQL="SELECT utilisateur,mdp FROM UTILISATEUR WHERE identifiant= AND mdp=;";  /*Contient la requête SQL sans les variables qui vont se rajouter dedans après*/
+
         printf("ceb pour l'authent\n");
         sscanf(resteRequete, "%[^/]/%s",login,mdp);
 
-        printf("DEBUG: login=%s \n", login);
-        printf("DEBUG: mdp=%s \n", mdp);
-char *messagetest=NULL;
-        sprintf(messagetest,"test %s",login);
-        printf("%s",messagetest);
-        //sprintf(sql,"SELECT  identifiant=%s AND pwd=%s",login,mdp);
-        //printf("\n");
-        //printf("sql=%s",sql);
+        //On compte le nombre de caractères de la requete + identifiant + mdp pour faire l'allocation nécessaire en mémoire(c'est un peu brouillon et archaïque je sais)
 
+        longReqSQL=strlen(reqSQL);
+        longLogin=strlen(login);
+        longMdp=strlen(mdp);
+        longReqSQL=longReqSQL+longLogin+longMdp;
+        p=malloc(longReqSQL*MORCEAU*sizeof(char));
+
+        //Puis on crée la requête et on la fout dans *sql
+        sprintf(p,"SELECT utilisateur,mdp FROM UTILISATEUR WHERE identifiant=%s AND mdp=%s;",login,mdp);
+        *sql=p;
         }
-
-
-
-
-
-
-
-
 
 
     else if(strcmp(idenRequete,"CONSULT_ETOILE")==0)
