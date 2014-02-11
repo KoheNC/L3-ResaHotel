@@ -51,7 +51,6 @@ int finConnexion = FALSE;
 int authentifier()
 {
     char login[10], pwd[10];
-    //char formatageMsg[50];
     char *retourMsg=NULL;
     char requeteSQL[100];
 
@@ -63,9 +62,10 @@ int authentifier()
     lire(pwd,10);
     sprintf(requeteSQL,"AUTHENT/%s/%s/END\n",login,pwd);
 
+
     if(Emission(requeteSQL)==1)
         {
-            printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
+        printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
         retourMsg=Reception();
         if (retourMsg!=EOF)
         {
@@ -89,16 +89,42 @@ int action_gerant(int choixGerant);
 
 int consulter_par_etoile() //ca renvoie un int ?!
     {
-    int nbreEtoile;
-    char formatageMsg[50];
-    char *retourMsg;
+    char requeteSQL[100];
+    char etoile[2];
+    char *retourMsg=NULL;
 
-    printf("Veuillez entrer le nombre d'étoiles souhaitées (max. 5:) \n");
-    //fgets(nbreEtoile,1,stdin);
-    scanf("%d", &nbreEtoile);
-    sprintf(formatageMsg,"CONSULT_ETOILE/%d/END",nbreEtoile);
+    vider_buffer();
 
-    // Pour chaque ligne validant la requête, le serveur va renvoyer une ligne, donc on affiche chaque ligne une à une
+    printf("Veuillez entrer le nombre d'étoiles souhaitées pour votre recherche:\n");
+    lire(etoile,2);
+    printf("Etoile=%s\n",etoile);
+    sprintf(requeteSQL,"CONSULT_ETOILE/%s/END\n",etoile);
+    printf("Requete=%s\n",requeteSQL);
+
+
+    if(Emission(requeteSQL)==1)//TOUTE CETTE PARTIE A MODIFIER
+        {
+        printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
+        retourMsg=Reception();
+        if (retourMsg!=EOF)
+        {
+            //printf("Authentification réussie. Bienvenue !\n");
+            return 1;
+        }
+        else
+            {
+            printf("Erreur lors de l'envoi des données au serveur. Retour au menu principal.\n");
+            return 0;
+            }
+        }
+    else
+        {
+        printf("Erreur lors de l'envoi des données au serveur. Retour au menu principal. \n");
+        return 0;
+        }
+}
+
+    /*/ Pour chaque ligne validant la requête, le serveur va renvoyer une ligne, donc on affiche chaque ligne une à une
     if(Emission(formatageMsg)==1)//côté serveur on oublie pas de mettre un \n avant chaque envoi !!!!!!
         {
         do
@@ -122,7 +148,7 @@ int consulter_par_etoile() //ca renvoie un int ?!
         printf("Erreur lors de la consultation des données ! \n");
         return 0;
         }
-    }
+    }*/
 
 int consulter_par_nom() //ca renvoie un int ?!
     {

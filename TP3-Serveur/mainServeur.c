@@ -27,18 +27,18 @@ int main() {
         fprintf(stderr, "Opened database successfully\n");
 
     //Création des tables de la DB
-    //char sql[1000];
+    char *sql=NULL;
     //sql="DROP TABLE IF EXISTS user;";
-    /*sql="DROP TABLE IF EXISTS user;"\
-        "DROP TABLE IF EXISTS hotel;"\
-        "DROP TABLE IF EXISTS reservation;"\
-        "CREATE TABLE user("\
-            "login   TEXT   PRIMARY KEY,"\
-            "pwd     TEXT   NOT NULL);"\
-            "INSERT INTO user (login,pwd)"\
-            "VALUES ('adrien','test');";
+    /*sql="DROP TABLE IF EXISTS UTILISATEUR;"\
+        "DROP TABLE IF EXISTS HOTEL;"\
+        "DROP TABLE IF EXISTS RESERVATION;"\
+        "CREATE TABLE UTILISATEUR("\
+            "identifiant   TEXT   PRIMARY KEY,"\
+            "mdp     TEXT   NOT NULL);"\
+            "INSERT INTO UTILISATEUR (identifiant,mdp)"\
+            "VALUES ('adrien','test');";*/
 
-    /* Execute SQL statement
+    /*/ Execute SQL statement
     int rc;
    rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
    if( rc != SQLITE_OK ){
@@ -49,23 +49,15 @@ int main() {
    }*/
    /////////////////////////////////////////////////////////////////////////
    //* Create SQL statement
-   char *sql=NULL;
+   //char *sql=NULL;
    int rc;
-   sql = "SELECT login from user where login='paul';";
+   //sql = "SELECT login from user where login='paul';";
 
    printf("%s\n",sql);
 
    char* data = "Callback function called";
 
-   /* Execute SQL statement*/
-   rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
-   if( rc != SQLITE_OK ){
-      fprintf(stderr, "SQL error: %s\n", zErrMsg);
-      sqlite3_free(zErrMsg);
-   }else{
-      fprintf(stdout, "Operation done successfully\n");
-      printf("%d",rc);//c'est pas rc qu'il faut check, mais ce que renvoie callback !!
-   }
+
 //*/
 
    ////////////////////////////////////////////////////////////////////////
@@ -83,6 +75,17 @@ int main() {
         extraction_requete(message,&sql);
         printf("DEBUG: SQL=%s\n",sql);
 
+        /////////////////////////////////////////////////////////////////////
+        /* Execute SQL statement*/
+   rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+   if( rc != SQLITE_OK ){
+      fprintf(stderr, "SQL error: %s\n", zErrMsg);
+      sqlite3_free(zErrMsg);
+   }else{
+      fprintf(stdout, "Operation done successfully\n");
+      printf("%d",rc);//c'est pas rc qu'il faut check, mais ce que renvoie callback !!
+   }
+//////////////////////////////////////////*//////////////////////////////////////
         printf("DEBUG: Après extraction:\n\n");
 		while(!fini) {
 			message = Reception();

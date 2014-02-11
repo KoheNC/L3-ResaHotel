@@ -81,7 +81,7 @@
 	<errno.h>
 	"serveur.h"
 
-1392150350 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\mainserveur.c
+1392157089 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\mainserveur.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -243,7 +243,7 @@
 
 1392149789 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\fonctionajouteeserveur.h
 
-1392150289 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\fonctionajouteeserveur.c
+1392156352 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\fonctionajouteeserveur.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
