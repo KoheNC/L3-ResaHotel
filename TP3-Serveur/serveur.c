@@ -9,11 +9,14 @@
 #include <ctype.h>
 #include <string.h>
 #include <sys/types.h>
-#include "sqlite3.h"
+#include <errno.h>
 
 #ifdef WIN32
 //#include <winsock2.h> //Ne sert pas car l'on compile avec la lib "libws2_32.a"
 #include <ws2tcpip.h>
+#define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
+#define close closesocket
+#define socklen_t int
 #else
 #include <unistd.h>
 #include <netdb.h>
@@ -24,88 +27,30 @@
 #include <strings.h>
 #endif
 
-#include <errno.h>
-
 #include "serveur.h"
 #include "fonctionAjouteeServeur.h"
+#include "sqlite3.h"
 
 #define TRUE 1
 #define FALSE 0
 #define LONGUEUR_TAMPON 4096
 
-
-#ifdef WIN32
-#define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
-#define close closesocket
-#define socklen_t int
-#endif
-
 //Callback utilisé pour le SELECT des requêtes SQL
 int callback(void *NotUsed, int argc, char **argv, char **azColName){
    int i;
+   printf("argc=%d\n",argc);
    for(i=0; i<argc; i++){
       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+
+      printf("DEBUG: azcolname[i]=%s\n",azColName[i]);
+      printf("DEBUG: argv[i]=%s\n",argv[i]);
    }
    printf("\n");
    return 0;
 }
 
-//8.a )Extraction d'une requête HTTP contenue dans une chaine de caractères
 
-int extraitFichier(char *requete, size_t longueurRequete, char *nomFichier, size_t maxNomFichier){
-    int i=0;
-    int iFichier=0; //Indice pour le tableau nomFichier
-    //Tant qu'on est pas arrivé au 1er /, on incrémente jusqu'à le trouver
-    while(requete[i]!='/'){
-        i++;
-        }
-
-/*Une fois trouvé, on prend tous les caractères qui suivent pour les mettre dans le tableau nomFichier
-Ce tableau sera le nom complet du fichier se trouvant dans la requête*/
-    while(requete[i]!=' '){
-        nomFichier[iFichier]=requete[i];
-        i++;
-        iFichier++;
-        }
-        return 1;
-    }
-/*8.b) On calcule la longueur d'un fichier passé en paramètre*/
-int size_t_longueur_fichier(char *nomFichier){
-    int tailleFichier=0;
-    FILE *fichier;
-    fichier=fopen(nomFichier,"r");
-        if (nomFichier==NULL){
-            printf("Impossible d'ouvrir le fichier, recommencez");
-            return 0;
-            }
-
-    fseek(fichier,0,SEEK_END);
-    tailleFichier=ftell(fichier);
-    printf("La taille du fichier est de %d bytes \n", tailleFichier);
-    fclose(fichier);
-    return 1;
-    }
-
-/*8.c) Renvoie à un client d'un fichier texte dont le nom est passé en paramètre*/
-int envoyerContenuFichierTexte(char *nomFichier){
-    FILE *fichier;
-    char tableau[200];
-
-    fichier=fopen(nomFichier, "r");
-    if (fichier==NULL){
-        printf("Erreur lors de l'ouverture du fichier, abandon...");
-        return 0;
-        }
-
-    while((fgets(tableau,200,fichier)!=NULL)){
-        Emission(tableau);
-    }
-    fclose(fichier);
-    return 1;
-
-}
 /* Variables cachees */
-
 /* le socket d'ecoute */
 int socketEcoute;
 /* longueur de l'adresse */

@@ -22,7 +22,7 @@ int extraction_requete(char *requete, char **sql)
         {
         char login[10], mdp[10];
         int longReqSQL=0, longLogin=0,longMdp=0;
-        char *reqSQL="SELECT identifiant,mdp FROM UTILISATEUR WHERE identifiant='' AND mdp='';";  /*Contient la requête SQL sans les variables qui vont se rajouter dedans après*/
+        char *reqSQL="SELECT COUNT(identifiant),mdp FROM UTILISATEUR WHERE identifiant='' AND mdp='';";  /*Contient la requête SQL sans les variables qui vont se rajouter dedans après*/
 
         printf("ceb pour l'authent\n");
         sscanf(resteRequete, "%[^/]/%s",login,mdp);
@@ -36,7 +36,7 @@ int extraction_requete(char *requete, char **sql)
         p=malloc(longReqSQL*MORCEAU*sizeof(char));
 
         //Puis on crée la requête et on la fout dans *sql
-        sprintf(p,"SELECT identifiant,mdp FROM UTILISATEUR WHERE identifiant='%s' AND mdp='%s';",login,mdp);
+        sprintf(p,"SELECT COUNT(identifiant),mdp FROM UTILISATEUR WHERE identifiant='%s' AND mdp='%s';",login,mdp);
         *sql=p;
         }
 

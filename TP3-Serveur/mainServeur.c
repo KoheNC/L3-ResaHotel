@@ -68,25 +68,25 @@ int main() {
 		int fini = 0;
 
 		AttenteClient();
-        printf("DEBUG: message avant réception=%s\n",message);
         message = Reception();
-        printf("DEBUG: message après réception=%s\n",message);
 
         extraction_requete(message,&sql);
-        printf("DEBUG: SQL=%s\n",sql);
+        printf("--------------------------\n");
 
         /////////////////////////////////////////////////////////////////////
         /* Execute SQL statement*/
-   rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
-   if( rc != SQLITE_OK ){
-      fprintf(stderr, "SQL error: %s\n", zErrMsg);
-      sqlite3_free(zErrMsg);
-   }else{
-      fprintf(stdout, "Operation done successfully\n");
-      printf("%d",rc);//c'est pas rc qu'il faut check, mais ce que renvoie callback !!
-   }
+        rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+        if( rc != SQLITE_OK ){
+            fprintf(stderr, "SQL error: %s\n", zErrMsg);
+            sqlite3_free(zErrMsg);
+            }else{
+                fprintf(stdout, "Operation done successfully\n");
+            }
 //////////////////////////////////////////*//////////////////////////////////////
+        printf("--------------------------\n");
+        printf("DEBUG: data=%s\n",data);
         printf("DEBUG: Après extraction:\n\n");
+
 		while(!fini) {
 			message = Reception();
 
