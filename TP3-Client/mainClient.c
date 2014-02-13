@@ -5,8 +5,8 @@
 
 int main()
 {
-	char *message;
-	int retour=0, choix=0, choixId=0, choixGerant=0, choixAffichageClient=0, choixClient=0;
+	char *message,*identifiant=NULL;
+	int retour=0, retourPrincipal=0,choix=0, choixId=0, choixGerant=0, choixAffichageClient=0, choixClient=0;
 
     choixMenuPrincipal:
 	printf("Bienvenue dans l'application ReserveHotel\n");
@@ -19,19 +19,24 @@ int main()
 	if(choix==1){
         if ((retour=Initialisation("localhost"))==1)
             {
-            printf("Vous êtes maintenant connecté au serveur \n");
-            printf("Qui êtes-vous ? \n");
-            printf("1: Gérant \n");
-            printf("2: Client désirant réserver une nuit \n");
-            printf("3: Déconnexion \n");
-            printf("Choix (1, 2 ou 3): \n");
-            scanf("%d",&choixId);
-
+                /////////////////////////////////////////////////////////////
+            do
+            {
+                    fflush(stdin);
+                    printf("Vous êtes maintenant connecté au serveur \n");
+                    printf("Qui êtes-vous ? \n");
+                    printf("1: Gérant \n");
+                    printf("2: Client désirant réserver une nuit \n");
+                    printf("3: Déconnexion \n");
+                    printf("Choix (1, 2 ou 3): \n");
+                    retourPrincipal=scanf("%d",&choixId);
+            }while(retourPrincipal!=1);
+        //////////////////////////////////////////////////////////////////////////
             switch(choixId)
                 {
                 //Si c'est un gérant
                 case 1:
-                    if((retour=authentifier())==1)
+                    if((retour=authentifier(&identifiant))==1)
                         {
                         printf("Que désirez-vous faire ? \n");
                         printf("1: enregistrer un nouvel hôtel \n");
@@ -43,12 +48,17 @@ int main()
                             printf("Échec de la connexion, retour au menu principal...\n");
                             goto choixMenuPrincipal;
                             };
-
-                        /*switch(choixGerant)
+///////////////////////////////////////////
+                        switch(choixGerant)
                             {
                             case 1:
-                                action
-                            }*/
+                                enregistrer_hotel();
+                            case 2:
+                                modifier_hotel();
+                            case 3:
+                                break;
+                            }
+////////////////////////////////////////////
 //ceci est un test
                 //Si c'est un client
                 case 2:

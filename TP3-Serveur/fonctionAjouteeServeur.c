@@ -6,7 +6,7 @@
 #define MORCEAU 8 //pour l'allocation
 
 //Extraction de la requête, tri des variables potentielles et formulation de la requête SQL en conséquence
-int extraction_requete(char *requete, char **sql)
+int extraction_requete(char *requete, char **sql, char *IDRequete)
 {
     char idenRequete[15], resteRequete[1000];
     int nbreCaractere=0;
@@ -16,6 +16,10 @@ int extraction_requete(char *requete, char **sql)
     sscanf(requete, "%[^/]/%[^END]",idenRequete,resteRequete);
     nbreCaractere=strlen(resteRequete);
     resteRequete[nbreCaractere-1]='\0';
+
+    //On copie l'identifiant de la requête pour pouvoir le réutiliser dans le main, qui déterminera l'utilisation de Callback() ou CallbackSELECT()
+    strcpy(IDRequete,idenRequete);
+
 
     //Comparaison du résultat et traitement
     if(strcmp(idenRequete,"AUTHENT")==0)
@@ -102,15 +106,60 @@ int extraction_requete(char *requete, char **sql)
         sprintf(p,"SELECT nomHotel,ville FROM HOTEL GROUP BY ville,nomHotel;");
         *sql=p;
         }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////$
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Il faut modifier la requete sql en fonction de la structure de la table car j'ai oublié de la noter.
     else if(strcmp(idenRequete,"ACTGER")==0)
         {
+            printf("je suis dans actger\n\n");
+            char nomHotel[100];
+            char nombreEtoile[2];
+            char ville[50];
+            char nombreChambre[2];
+            char nomGerant[100];
+            char action[13];
+            char finRequete[50];
+            int longReqSQL=0, longNomHotel=0, longVille=0, longNomGerant=0, longNombreChambre=0,longNombreEtoile=0;
+            printf("test\n\n");
+            //sscanf(resteRequete, "%[^/]/%s/%[^/]%s/%[^/]%s/%[^/]%s/%[^/]%s/%[^/]%s",action,nomHotel,nombreEtoile,ville,nombreChambre,nomGerant,finRequete);
+            //sscanf(requete, "%[^/]/%[^END]",idenRequete,resteRequete);
+            sscanf(resteRequete, "%[^/]/%[^/]/%[^/]/%[^/]/%[^/]/%[^/]/%[^/]/",action,nomHotel,nombreEtoile,ville,nombreChambre,nomGerant,finRequete);
+            printf("Action=%s\n",action);
+            printf("resterequete=%s\n",resteRequete);
+                longVille=strlen(ville);
+                longNombreChambre=strlen(nombreChambre);
+                longNomGerant=strlen(nomGerant);
+                longNomHotel=strlen(nomHotel);
+                longNombreEtoile=strlen(nombreEtoile);
+
+            if(strcmp(action,"SaveNewHotel")==0)
+            {
+                printf("%s %s %s %s",nomHotel,nombreEtoile,ville,nombreChambre);
+                char *reqSQL="INSERT INTO HOTEL WHERE (nomHotel,ville,categorie,nombreChambre,gerant) VALUES ('','','','','')";
+                /*Contient la requête SQL sans les variables qui vont se rajouter dedans après*/
+
+                printf("ceb pour la requete d'enregistrement de lhotel !\n\n");
+                //On compte le nombre de caractères de la requete
+                longReqSQL=strlen(reqSQL);
+                longReqSQL=longReqSQL+longVille+longNombreChambre+longNomGerant+longNomHotel+longNombreEtoile;
+                p=malloc(longReqSQL*MORCEAU*sizeof(char));
+                sprintf(p,"INSERT INTO HOTEL WHERE (nomHotel,ville,categorie,nombreChambre,gerant) VALUES ('%s','%s','%s','%s','%s');",nomHotel,ville,nombreEtoile,nombreChambre,nomGerant);
+                *sql=p;
+
+
+            }
+            else
+            {
+                char *reqSQL="UPDATE HOTEL SET ville='',categorie='',nombreChambre='',gerant='' WHERE nomHotel='' ";
+                longReqSQL=strlen(reqSQL);
+                longReqSQL=longReqSQL+longVille+longNombreChambre+longNomGerant+longNomHotel+longNombreEtoile;
+                p=malloc(longReqSQL*MORCEAU*sizeof(char));
+                sprintf(p,"UPDATE HOTEL SET ville='%s',categorie='%s',nombreChambre='%s',gerant='%s' WHERE nomHotel='%s';",ville,nombreEtoile,nombreChambre,nomGerant,nomHotel);
+                *sql=p;
+            }
 
         }
-
-
-    Emission("1\n");
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
     return 1;
 };

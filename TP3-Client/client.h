@@ -46,7 +46,7 @@ void Terminaison();
 
 /*Permet de construire la chaine nécesaire à l'authentification
 */
-int authentifier();
+int authentifier(char **identifiant);
 
 /*Sélection des hôtels par leur nombre d'étoiles
 */
@@ -69,4 +69,7 @@ Envoi du choix du gérant au serveur pour le traitement
 */
 int actionGerant(int choixGerant);
 void clean_stdin(void);
+
+int enregistrer_hotel();
+int modifier_hotel();
 #endif

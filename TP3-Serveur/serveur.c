@@ -36,19 +36,36 @@
 #define LONGUEUR_TAMPON 4096
 
 //Callback utilisé pour le SELECT des requêtes SQL
+int callbackSELECT(void *NotUsed, int argc, char **argv, char **azColName){
+   int i;
+   for(i=0; i<argc; i++){
+
+      if(*argv[i]=='1')
+        {
+            printf("OK pour l'authen dans le callback !\n");
+            printf("J'envois un truc\n");
+            Emission("1\n");
+            break;
+        }
+        else
+            {
+            G_connecte=FALSE;
+            Emission("0\n");
+            printf("J'envois un truc\n");
+            break;
+            }
+   }
+   return 0;
+}
+
 int callback(void *NotUsed, int argc, char **argv, char **azColName){
    int i;
-   printf("argc=%d\n",argc);
    for(i=0; i<argc; i++){
       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-
-      printf("DEBUG: azcolname[i]=%s\n",azColName[i]);
-      printf("DEBUG: argv[i]=%s\n",argv[i]);
    }
    printf("\n");
    return 0;
 }
-
 
 /* Variables cachees */
 /* le socket d'ecoute */

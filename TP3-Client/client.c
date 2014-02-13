@@ -37,6 +37,7 @@
 #define TRUE 1
 #define FALSE 0
 #define LONGUEUR_TAMPON 4096
+#define MORCEAU 8
 
 /* Variables cachees */
 
@@ -48,27 +49,34 @@ int debutTampon;
 int finTampon;
 int finConnexion = FALSE;
 
-int authentifier()
+int authentifier(char **identifiant)
 {
-    char login[10], pwd[10];
-    char *retourMsg=NULL;
+    char login[10], pwd[10],*p;
+    char *retourMsg=NULL,*comparaison="1";
     char requeteSQL[100];
+    int longLogin=0;
 
     vider_buffer(); //On vide le buffer pour éviter les problèmes liés aux caractères restés dedans avec les précédents choix
+    //free(retourMsg);
 
     printf("Veuillez entrer votre login\n");
     lire(login,10);
     printf("Veuillez entrer votre mot de passe \n");
     lire(pwd,10);
     sprintf(requeteSQL,"AUTHENT/%s/%s/END\n",login,pwd);
-
+    printf("requeteSQL=%s\n",requeteSQL);
 
     if(Emission(requeteSQL)==1)
         {
         printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
         retourMsg=Reception();
-        if (retourMsg!=EOF)
-        {
+
+        if (*retourMsg==*comparaison)
+            {
+            longLogin=strlen(login);
+            p=malloc(longLogin*MORCEAU*sizeof(char));
+            strcpy(p,login);
+            *identifiant=p;
             printf("Authentification réussie. Bienvenue !\n");
             return 1;
         }
@@ -86,12 +94,108 @@ int authentifier()
 }
 
 int action_gerant(int choixGerant);
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+int enregistrer_hotel()
+{
+    char requeteSQL[200];
+    char nomHotel[30];
+    char nombreEtoile[2];
+    char ville[20];
+    char nombreChambre[3];
+    char nomGerant[20];
+    char *retourMsg=NULL;
 
+    //int resultat=0;
+    vider_buffer();
+    printf("Veuillez saisir le nom de l'hotel :\n");
+    lire(nomHotel,30);
+    printf("Veuillez saisir le nombre d'etoile de votre etoile :\n");
+    lire(nombreEtoile,2);
+    printf("Veuillez saisir le nom de la ville où se trouve l'hotel :\n");
+    lire(ville,20);
+    printf("Veuillez saisir le nombre de chambre disponible de votre etoile :\n");
+    lire(nombreChambre,3);
+    printf("Veuillez saisir votre nom :\n");
+    lire(nomGerant,20);
+    sprintf(requeteSQL,"ACTGER/SaveNewHotel/%s/%s/%s/%s/END\n",nomHotel,nombreEtoile,ville,nombreChambre);
+    printf("Requete=%s\n",requeteSQL);
+
+    if(Emission(requeteSQL)==1)//TOUTE CETTE PARTIE A MODIFIER
+    {
+        printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
+        retourMsg=Reception();
+        printf("retourMsg=%s\n",retourMsg);
+    }
+    else
+    {
+        printf("Erreur lors de l'envoi des données au serveur. Retour au menu principal.\n");
+    }
+}
+
+int modifier_hotel()
+{
+    char requeteSQL[200];
+    char nomHotel[30];
+    char nombreChambre[3];
+    char nomGerant[20];
+    char nombreEtoile[2];
+    char *retourMsg=NULL;
+    int choix,retour;
+    vider_buffer();
+    printf("Veuillez saisir le nom de l'hotel dont vous souhaitez modifier les informations:\n");
+    lire(nomHotel,30);
+    do
+    {
+        printf("L'hotel dont vous desirez change les informations est:%s\n",nomHotel);
+        printf("Souhaitez vous :\n");
+        printf(" 1 : Modifier le nombre de chambre que vous mettez à disposition.\n");
+        printf(" 2 : Modifier le nom du gérant de l'hotel.\n");
+        printf(" 3 : Modifier la categorie de l'hotel.\n");
+        printf(" 4 : Terminer les modifications.\n");
+        do
+        {
+            fflush(stdin);
+            retour=scanf("%d",&choix);
+        }while(retour!=1);
+        fflush(stdin);
+        if(choix==1)
+        {
+            printf("Veuillez saisir le nombre de chambre a disposition de votre hotel:\n");
+            lire(nombreChambre,3);
+        }
+        if(choix==2)
+        {
+            printf("Veuillez saisir le nom du nouveau gerant de votre hotel :\n");
+            lire(nomGerant,2);
+        }
+        if(choix==3)
+        {
+            printf("Veuillez saisir la nouvelle categorie de votre hotel :\n");
+            lire(nombreEtoile,3);
+        }
+    }while(choix!=4);
+
+    sprintf(requeteSQL,"ACTGER/EditHotel/%s/%s/%s/%s/END\n",nomHotel,nombreChambre,nombreEtoile,nomGerant);
+    printf("Requete=%s\n",requeteSQL);
+    if(Emission(requeteSQL)==1)
+    {
+        printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
+        retourMsg=Reception();
+    }
+    else
+    {
+        printf("Erreur lors de l'envoi des données au serveur. Retour au menu principal.\n");
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 int consulter_par_etoile() //ca renvoie un int ?!
     {
     char requeteSQL[100];
     char etoile[2];
-    char *retourMsg=NULL;
+    char *retourMsg=NULL,*comparaison="1";
 
     vider_buffer();
 
@@ -106,7 +210,7 @@ int consulter_par_etoile() //ca renvoie un int ?!
         {
         printf("DEBUG: En attente de la réception d'un message coté du serveur\n");
         retourMsg=Reception();
-        if (retourMsg!=EOF)
+        if(*retourMsg==*comparaison)
         {
             //printf("Authentification réussie. Bienvenue !\n");
             return 1;
@@ -472,6 +576,8 @@ int EmissionBinaire(char *donnees, size_t taille) {
 
 /* Ferme la connexion.
  */
-void Terminaison() {
+void Terminaison()
+    {
+    Emission("CLOSE_SOCKET\n");
 	close(socketClient);
-}
+    }
