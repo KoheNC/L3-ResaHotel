@@ -81,7 +81,7 @@
 	<errno.h>
 	"serveur.h"
 
-1392265077 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\mainserveur.c
+1392358173 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\mainserveur.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -89,12 +89,12 @@
 	"sqlite3.h"
 	"fonctionAjouteeServeur.h"
 
-1392244741 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.h
+1392349107 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.h
 
 1386363916 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\sqlite3.h
 	<stdarg.h>
 
-1392264447 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.c
+1392352536 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\serveur.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
@@ -102,6 +102,7 @@
 	<sys/types.h>
 	<errno.h>
 	<ws2tcpip.h>
+	<windows.h>
 	<unistd.h>
 	<netdb.h>
 	<sys/socket.h>
@@ -113,7 +114,7 @@
 	"fonctionAjouteeServeur.h"
 	"sqlite3.h"
 
-1392241699 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\sqlite3.c
+1392352446 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\sqlite3.c
 	<stdarg.h>
 	"config.h"
 	<stdint.h>
@@ -241,9 +242,9 @@
 	<unicode/ubrk.h>
 	<unicode/utf16.h>
 
-1392264226 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\fonctionajouteeserveur.h
+1392333060 c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\fonctionajouteeserveur.h
 
-1392263033 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\fonctionajouteeserveur.c
+1392358493 source:c:\users\swoosh\google drive\github\l3-resahotel\tp3-serveur\fonctionajouteeserveur.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>

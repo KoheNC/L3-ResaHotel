@@ -14,6 +14,7 @@
 #ifdef WIN32
 //#include <winsock2.h> //Ne sert pas car l'on compile avec la lib "libws2_32.a"
 #include <ws2tcpip.h>
+#include <windows.h>
 #define perror(x) printf("%s : code d'erreur : %d\n", (x), WSAGetLastError())
 #define close closesocket
 #define socklen_t int
@@ -35,15 +36,13 @@
 #define FALSE 0
 #define LONGUEUR_TAMPON 4096
 
-//Callback utilisé pour le SELECT des requêtes SQL
-int callbackSELECT(void *NotUsed, int argc, char **argv, char **azColName){
+//Callback utilisé pour le SELECT COUNT des requêtes SQL
+int callbackCOUNT(void *NotUsed, int argc, char **argv, char **azColName){
    int i;
    for(i=0; i<argc; i++){
 
       if(*argv[i]=='1')
         {
-            printf("OK pour l'authen dans le callback !\n");
-            printf("J'envois un truc\n");
             Emission("1\n");
             break;
         }
@@ -51,15 +50,32 @@ int callbackSELECT(void *NotUsed, int argc, char **argv, char **azColName){
             {
             G_connecte=FALSE;
             Emission("0\n");
-            printf("J'envois un truc\n");
             break;
             }
    }
    return 0;
 }
 
-int callback(void *NotUsed, int argc, char **argv, char **azColName){
+int callbackCONSULT(void *NotUsed, int argc, char **argv, char **azColName)
+    {
+    int i;
+    char msgReponse[210]={0};
+    for(i=0; i<argc; i++){
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+        //////////////////////////
+        printf("argc=%d",argc);
+        sprintf(msgReponse,"%s/%s/%d\n",azColName[i],argv[i],argc);
+        //printf("\nmsgReponse=%s\n",msgReponse);
+        Emission(msgReponse);
+        Sleep(20);}
+        //////////////////////////
+        printf("\n");
+    return 0;
+   }
+
+int callback(void *data, int argc, char **argv, char **azColName){
    int i;
+   fprintf(stderr, "%s: ", (const char*)data);
    for(i=0; i<argc; i++){
       printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
    }
@@ -164,7 +180,7 @@ int AttenteClient() {
 		return 0;
 	}
 	if(getnameinfo(clientAddr, longeurAdr, machine, NI_MAXHOST, NULL, 0, 0) == 0) {
-		printf("Client sur la machine d'adresse %s connectee.\n", machine);
+		printf("\nClient sur la machine d'adresse %s connectee.\n", machine);
 	} else {
 		printf("Client anonyme connecte.\n");
 	}
@@ -221,10 +237,16 @@ char *Reception() {
 			retour = recv(socketService, tamponClient, LONGUEUR_TAMPON, 0);
 			//fprintf(stderr, "retour : %d\n", retour);
 			if (retour < 0) {
-				perror("Reception, erreur de recv.");
+				perror("\nReception, erreur de recv.");
+				printf("*******************************************************************\n");
+                printf("***                 Attente d'un nouveau client                 ***\n");
+				printf("*******************************************************************\n");
 				return NULL;
 			} else if(retour == 0) {
-				fprintf(stderr, "Reception, le client a ferme la connexion.\n");
+				fprintf(stderr, "Reception, le client a ferme la connexion.\n\n");
+				printf("*******************************************************************\n");
+                printf("***                 Attente d'un nouveau client                 ***\n");
+				printf("*******************************************************************\n");
 				finConnexion = TRUE;
 				// on n'en recevra pas plus, on renvoie ce qu'on avait ou null sinon
 				if(index > 0) {
@@ -262,7 +284,7 @@ int Emission(char *message) {
         perror("Emission, probleme lors du send.");
         return 0;
 	}
-	printf("Emission de %d caracteres.\n", taille+1);
+	//printf("Emission de %d caracteres.\n", taille+1);
 	return 1;
 }
 

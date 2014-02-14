@@ -54,7 +54,9 @@ void Terminaison();
 /*
 This callback provides a way to obtain results from SELECT statements
 */
-int callbackSELECT(void *NotUsed, int argc, char **argv, char **azColName);
+int callbackCOUNT(void *NotUsed, int argc, char **argv, char **azColName);
+
+int callbackCONSULT(void *NotUsed, int argc, char **argv, char **azColName);
 
 int callback(void *NotUsed, int argc, char **argv, char **azColName);
 

@@ -1,71 +1,78 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "client.h"
 #include <string.h>
+#include "client.h"
+#include "fonctionAjoutee.h"
+
 
 int main()
 {
-	char *message,*identifiant=NULL;
+	char *identifiant=NULL; //*message,
 	int retour=0, retourPrincipal=0,choix=0, choixId=0, choixGerant=0, choixAffichageClient=0, choixClient=0;
 
-    choixMenuPrincipal:
-	printf("Bienvenue dans l'application ReserveHotel\n");
-	printf("1: Accéder au serveur \n");
-	printf("2: Quitter");
+    L_choixMenuPrincipal:
+	printf("\nBienvenue dans l'application ReserveHotel\n\n");
+	printf("1: Acceder au serveur \n");
+	printf("2: Quitter\n\n");
 	printf("Choix(1 ou 2):\n");
 	scanf("%d",&choix);
 
     //Choix du menu principal
-	if(choix==1){
+	if(choix==1)
+        {
         if ((retour=Initialisation("localhost"))==1)
             {
-                /////////////////////////////////////////////////////////////
             do
             {
-                    fflush(stdin);
-                    printf("Vous êtes maintenant connecté au serveur \n");
-                    printf("Qui êtes-vous ? \n");
-                    printf("1: Gérant \n");
-                    printf("2: Client désirant réserver une nuit \n");
-                    printf("3: Déconnexion \n");
+                    vider_buffer();
+                    printf("Vous etes maintenant connecte au serveur \n");
+
+                    L_choixConnecte:
+                    printf("*****************************************\n");
+                    printf("\n\nQui etes-vous ? \n\n");
+                    printf("1: Gerant \n");
+                    printf("2: Client desirant reserver une nuit \n");
+                    printf("3: Deconnexion \n\n");
                     printf("Choix (1, 2 ou 3): \n");
                     retourPrincipal=scanf("%d",&choixId);
             }while(retourPrincipal!=1);
-        //////////////////////////////////////////////////////////////////////////
+
             switch(choixId)
                 {
                 //Si c'est un gérant
                 case 1:
                     if((retour=authentifier(&identifiant))==1)
                         {
-                        printf("Que désirez-vous faire ? \n");
-                        printf("1: enregistrer un nouvel hôtel \n");
-                        printf("2: Modifier les informations de votre hôtel \n");
-                        printf("3: Retour au menu principal \n");
+                        printf("Que désirez-vous faire ? \n\n");
+                        printf("1: Enregistrer un nouvel hotel \n");
+                        printf("2: Modifier les informations de votre hotel \n");
+                        printf("3: Retour au menu principal (Vous serez desauthentifie)\n");
+                        printf("\nChoix (1, 2 ou 3): \n");
                         scanf("%d",&choixGerant);
                         }else
                             {
-                            printf("Échec de la connexion, retour au menu principal...\n");
-                            goto choixMenuPrincipal;
+                            printf("Echec de la connexion, retour au menu principal...\n");
+                            goto L_choixMenuPrincipal;
                             };
-///////////////////////////////////////////
                         switch(choixGerant)
                             {
                             case 1:
-                                enregistrer_hotel();
+                                enregistrer_hotel(identifiant);
+                                goto L_choixConnecte;
                             case 2:
-                                modifier_hotel();
+                                modifier_hotel(identifiant);
                             case 3:
-                                break;
+                                free(identifiant);
+                                goto L_choixConnecte;
                             }
-////////////////////////////////////////////
-//ceci est un test
+
                 //Si c'est un client
                 case 2:
-                    printf("Bienvenue cher client, que désirez-vous faire ? \n");
-                    printf("1: Consulter la liste des hôtels \n");
-                    printf("2: Réserver un hôtel \n");
-                    printf("3: Retour au menu principal \n");
+                    vider_buffer();
+                    printf("\nBienvenue cher client, que desirez-vous faire ? \n");
+                    printf("1: Consulter la liste des hotels \n");
+                    printf("2: Reserver un hotel \n");
+                    printf("3: Retour au menu principal \n\n");
                     printf("Choix(1,2 ou 3): \n");
                     scanf("%d",&choixClient);
 
@@ -74,80 +81,51 @@ int main()
                         {
                         //Affichage des hôtels
                         case 1:
-                            printf("Souhaitez-vous:\n");
-                            printf("1: Afficher la liste des hôtels par nombre d'étoiles \n");
-                            printf("2: Afficher la liste des hôtels par nom \n");
-                            printf("3: Afficher la liste des hôtels par ville \n");
-                            printf("4: Retour au menu précédent \n");
+                            printf("\nSouhaitez-vous:\n\n");
+                            printf("1: Afficher la liste des hotels par nombre d'etoiles \n");
+                            printf("2: Afficher la liste des hotels par nom \n");
+                            printf("3: Afficher la liste des hotels par ville \n");
+                            printf("4: Retour au menu precedent \n");
                             scanf("%d",&choixAffichageClient);
                             switch(choixAffichageClient)
                                 {
                                 case 1:
                                     consulter_par_etoile();
+                                    printf("Retour au menu principal...\n");
+                                    break;
                                 case 2:
                                     consulter_par_nom();
+                                    printf("Retour au menu principal...\n");
+                                    break;
                                 case 3:
                                     consulter_par_ville();
+                                    printf("Retour au menu principal...\n");
+                                    break;
                                 case 4:
                                     break;
                                 }
-                            //Réservation d'un hôtel
+                            break;
+                        //Réservation d'un hôtel
                         case 2:
-                            reserver(); //On testera le retour directement dans la fonction, et le printf aussi tient !
+                            reserver();
+                            break;
                         case 3:
                             break;
                         }
-
+                    goto L_choixConnecte;
                 //Si on quitte l'application
                 case 3:
-                    if(retour==1)
-                        Terminaison();     //terminaison c'est pas pour couper la connexion ?
-             }
-            }else
+                    Terminaison();
+                }
+            }
+            else
                 {
-                printf("Échec de la connexion\n");
-                goto choixMenuPrincipal;
+                printf("Echec de la connexion\n");
+                goto L_choixMenuPrincipal;
                 }
-                }
-    /*else
-        break;
+        }
+    else
+        Terminaison();
 
-	if(InitialisationAvecService("localhost","3128") != 1) {
-		printf("Erreur d'initialisation\n");
-		return 1;*/
-	//}
-
-
-
-	/*if(Emission("GET / HTTP/1.1\n")!=1) {
-		printf("Erreur d'Žmission\n");
-		return 1;
-    }
-
-    if(Emission("Host: www.google.fr \n")!=1) {
-		printf("Erreur d'Žmission\n");
-		return 1;
-    }
-
-    if(Emission("\n")!=1) {
-		printf("Erreur d'Žmission\n");
-		return 1;
-    }
-*/
-    do{
-        free(message);
-        message = Reception();
-        if(message != NULL) {
-            printf("J'ai recu: %s\n", message);
-            }
-        else {
-            printf("Erreur de rŽception\n");
-            return 1;
-            break;
-            }
-        }while(strstr(message,"</html>")==NULL);
-
-	Terminaison();
-
-	return 0;
+	return 1;
 }

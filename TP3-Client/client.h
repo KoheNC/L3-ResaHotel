@@ -44,32 +44,8 @@ int EmissionBinaire(char *donnees, size_t taille);
  */
 void Terminaison();
 
-/*Permet de construire la chaine nécesaire à l'authentification
-*/
-int authentifier(char **identifiant);
 
-/*Sélection des hôtels par leur nombre d'étoiles
-*/
-int consulter_par_etoile();
-
-/*Sélection des hôtels par leur nom
-*/
-int consulter_par_nom();
-
-/*Sélection des hôtels par leur Ville
-*/
-int consulter_par_ville();
-
-/*Réservation d'un hôtel avec ses caractéristiques
-*/
-int reserver();
-
-/*
-Envoi du choix du gérant au serveur pour le traitement
-*/
-int actionGerant(int choixGerant);
 void clean_stdin(void);
 
-int enregistrer_hotel();
-int modifier_hotel();
+
 #endif
